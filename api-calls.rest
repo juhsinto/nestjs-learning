@@ -1,0 +1,13 @@
+### GET localhost:3000
+GET http://localhost:3000
+
+### GET localhost:3000/users
+GET http://localhost:3000/users
+
+### GET specific user
+GET http://localhost:3000/users/1
+Content-Type: application/json
+
+### POST create user
+POST http://localhost:3000/users
+Content-Type: application/json
