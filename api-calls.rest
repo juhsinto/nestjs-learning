@@ -4,10 +4,25 @@ GET http://localhost:3000
 ### GET localhost:3000/users
 GET http://localhost:3000/users
 
+### GET localhost:3000/users?query=string
+GET http://localhost:3000/users?gender=male
+
 ### GET specific user
 GET http://localhost:3000/users/1
-Content-Type: application/json
+
+### GET specific user
+GET http://localhost:3000/users?limit=5&page=1/false
+
 
 ### POST create user
 POST http://localhost:3000/users
 Content-Type: application/json
+
+{
+    "id": 9,
+    "name": "john",
+    "email": "something@email.com",
+    "age": 26,
+    "gender": "female",
+    "isMarried": false
+}

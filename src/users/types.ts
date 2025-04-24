@@ -1,7 +1,8 @@
 export interface User {
   id: number;
   name: string;
-  age: number;
-  gender: string;
+  email: string;
+  // age: number;
+  gender?: string;
   isMarried: boolean;
 }
