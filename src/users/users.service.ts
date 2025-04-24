@@ -1,3 +1,4 @@
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { User } from './types';
 
 export class UsersService {
@@ -30,10 +31,14 @@ export class UsersService {
   }
 
   createUser(user: User) {
+    if (this.users.find((x) => x.id === user.id)) {
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+    }
     this.users.push(user);
   }
 
   getUsersIsMarried(isMarried: boolean) {
-    return this.users.find((x) => x.isMarried === isMarried);
+    const user = this.users.find((x) => x.isMarried === isMarried);
+    return user;
   }
 }

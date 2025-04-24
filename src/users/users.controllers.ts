@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  // DefaultValuePipe,
   Get,
   Param,
   ParseBoolPipe,
@@ -10,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from 'src/dtos/create-user.dto';
-import { GetUserParamDto } from 'src/dtos/get-user-param.dto';
 import { User } from './types';
 // import { GetUserParamDto } from 'src/dtos/get-user-param.dto';
 
@@ -24,15 +24,14 @@ export class UsersController {
 
   @Get()
   getUsers(@Query() queryString: { gender: string }): User[] {
-    const usersService = new UsersService();
     if (queryString?.gender) {
-      return usersService
+      return this.usersService
         .getAllUsers()
         .filter((u) => u.gender === queryString.gender);
     }
 
     console.log('jm: get all users');
-    return usersService.getAllUsers();
+    return this.usersService.getAllUsers();
   }
 
   @Get(':id')
@@ -43,11 +42,12 @@ export class UsersController {
     return this.usersService.getUserById(id);
   }
 
-  @Get('filter/:isMarried')
-  getUsersFiltered(@Param('isMarried', ParseBoolPipe) isMarried: boolean) {
-    console.log('jm: get users filtered by param ', isMarried);
+  @Get('married/:isMarried')
+  getUsersFiltered(@Param('isMarried', ParseBoolPipe) married: boolean) {
+    console.log('jm: get users filtered by param ', married);
+
     // This handler runs when isMarried is provided
-    return this.usersService.getUsersIsMarried(isMarried);
+    return this.usersService.getUsersIsMarried(married);
   }
 
   @Post()
@@ -55,7 +55,11 @@ export class UsersController {
     @Body()
     user: CreateUserDto,
   ) {
-    console.log('creating a new user with details ' + JSON.stringify(user));
-    return this.usersService.createUser(user);
+    console.log(
+      'attempting to creating a new user with details ' + JSON.stringify(user),
+    );
+    const response = this.usersService.createUser(user);
+
+    return response;
   }
 }
