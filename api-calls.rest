@@ -8,7 +8,7 @@ GET http://localhost:3000/users
 GET http://localhost:3000/users?gender=male
 
 ### GET specific user (if ID specified)
-GET http://localhost:3000/users/9
+GET http://localhost:3000/users/1
 
 ### GET user by filter ; not optional
 GET http://localhost:3000/users/married/false
@@ -19,9 +19,20 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "id": 9,
+    "id": 10,
     "name": "sfsdfsd",
     "email": "somethsdfsding@email.com",
+    "age": 28,
     "gender": "female",
     "isMarried": false
+}
+
+
+### PATCH user
+PATCH http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "isMarried": true,
+    "gender": "female"
 }

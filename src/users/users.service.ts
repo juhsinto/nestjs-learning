@@ -41,4 +41,27 @@ export class UsersService {
     const user = this.users.find((x) => x.isMarried === isMarried);
     return user;
   }
+
+  updateUser(newUserDetails: Partial<User>) {
+    console.log('trying to update with ', newUserDetails);
+    const user = this.users.find((user) => {
+      if (user.id === newUserDetails.id) {
+        if (newUserDetails?.email) {
+          user.email = newUserDetails.email;
+        }
+        if (newUserDetails?.name) {
+          user.name = newUserDetails.name;
+        }
+        if (newUserDetails?.gender) {
+          user.gender = newUserDetails.gender;
+        }
+        if (newUserDetails?.isMarried) {
+          user.isMarried = newUserDetails.isMarried;
+        }
+      }
+      return user;
+    });
+
+    return user;
+  }
 }

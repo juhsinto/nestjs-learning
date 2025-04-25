@@ -1,18 +1,18 @@
 import {
   Body,
   Controller,
-  // DefaultValuePipe,
   Get,
   Param,
   ParseBoolPipe,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
 } from '@nestjs/common';
+import { User } from './types';
 import { UsersService } from './users.service';
 import { CreateUserDto } from 'src/dtos/create-user.dto';
-import { User } from './types';
-// import { GetUserParamDto } from 'src/dtos/get-user-param.dto';
+import { UpdateUserDto } from 'src/dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -60,6 +60,15 @@ export class UsersController {
     );
     const response = this.usersService.createUser(user);
 
+    return response;
+  }
+
+  @Patch()
+  updateUser(@Body() user: UpdateUserDto) {
+    console.log(
+      'attempting to update a new user with details ' + JSON.stringify(user),
+    );
+    const response = this.usersService.updateUser(user);
     return response;
   }
 }
