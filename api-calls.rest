@@ -36,3 +36,8 @@ Content-Type: application/json
     "id": 1,
     "gender": "female"
 }
+
+
+### GET get Tweets
+GET http://localhost:3000/tweet/1
+Content-Type: application/json
