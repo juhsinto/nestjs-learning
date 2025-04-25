@@ -33,6 +33,6 @@ PATCH http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "isMarried": true,
+    "id": 1,
     "gender": "female"
 }

@@ -16,11 +16,7 @@ import { UpdateUserDto } from 'src/dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  usersService: UsersService;
-
-  constructor() {
-    this.usersService = new UsersService();
-  }
+  constructor(private usersService: UsersService) {}
 
   @Get()
   getUsers(@Query() queryString: { gender: string }): User[] {
@@ -56,7 +52,8 @@ export class UsersController {
     user: CreateUserDto,
   ) {
     console.log(
-      'attempting to creating a new user with details ' + JSON.stringify(user),
+      'jm: attempting to creating a new user with details ' +
+        JSON.stringify(user),
     );
     const response = this.usersService.createUser(user);
 
@@ -66,7 +63,8 @@ export class UsersController {
   @Patch()
   updateUser(@Body() user: UpdateUserDto) {
     console.log(
-      'attempting to update a new user with details ' + JSON.stringify(user),
+      'jm: attempting to update a new user with details ' +
+        JSON.stringify(user),
     );
     const response = this.usersService.updateUser(user);
     return response;

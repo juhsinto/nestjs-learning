@@ -1,6 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from './types';
 
+@Injectable()
 export class UsersService {
   users: User[] = [
     {
@@ -43,7 +44,7 @@ export class UsersService {
   }
 
   updateUser(newUserDetails: Partial<User>) {
-    console.log('trying to update with ', newUserDetails);
+    console.log('jm: trying to update with ', newUserDetails);
     const user = this.users.find((user) => {
       if (user.id === newUserDetails.id) {
         if (newUserDetails?.email) {
