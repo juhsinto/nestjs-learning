@@ -24,6 +24,7 @@ Content-Type: application/json
     "email": "somethsdfsding@email.com",
     "age": 28,
     "gender": "female",
+    "password": "fatcat32",
     "isMarried": false
 }
 
@@ -41,3 +42,15 @@ Content-Type: application/json
 ### GET get Tweets
 GET http://localhost:3000/tweet/1
 Content-Type: application/json
+
+
+
+### POST login user
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+    
+    "email": "somethsdfsding@email.com",
+    "password": "fatcat32"
+}

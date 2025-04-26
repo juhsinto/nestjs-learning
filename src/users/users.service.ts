@@ -1,8 +1,20 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { User } from './types';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+  ) {}
+
   users: User[] = [
     {
       id: 1,
@@ -11,6 +23,7 @@ export class UsersService {
       // age: 28,
       gender: 'male',
       isMarried: false,
+      password: 'fatcat32',
     },
     {
       id: 2,
@@ -19,11 +32,16 @@ export class UsersService {
       // age: 34,
       gender: 'fa',
       isMarried: true,
+      password: 'fatcat32',
     },
   ];
 
   getAllUsers() {
-    return this.users;
+    if (this.authService.isAuthenticated) {
+      return this.users;
+    } else {
+      return 'You are not logged in';
+    }
   }
 
   getUserById(id: number) {

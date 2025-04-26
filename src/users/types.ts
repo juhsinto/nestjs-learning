@@ -5,4 +5,5 @@ export interface User {
   // age: number;
   gender?: string;
   isMarried: boolean;
+  password: string;
 }

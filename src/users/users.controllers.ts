@@ -19,11 +19,14 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getUsers(@Query() queryString: { gender: string }): User[] {
+  getUsers(@Query() queryString: { gender: string }): User[] | string {
     if (queryString?.gender) {
-      return this.usersService
-        .getAllUsers()
-        .filter((u) => u.gender === queryString.gender);
+      console.log('jm: get users by gender querystring');
+
+      const users = this.usersService.getAllUsers();
+      return Array.isArray(users)
+        ? users.filter((u) => u.gender === queryString.gender)
+        : users;
     }
 
     console.log('jm: get all users');
