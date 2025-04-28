@@ -114,18 +114,18 @@ export class UsersService {
 
     // create a profile
     userDto.profile = userDto.profile ?? {};
-    const profile = this.profileRepository.create(userDto.profile);
-    await this.profileRepository.save(profile);
+    // const profile = this.profileRepository.create(userDto.profile);
+    // await this.profileRepository.save(profile);
 
     // create a user obj
     const user = this.userRepository.create(userDto);
-    console.log('jm: creating a user ', user);
+    // console.log('jm: creating a user ', user);
     // set the profile
-    user.profile = profile;
+    // user.profile = profile;
 
     // save the user
     const response = await this.userRepository.save(user);
-    console.log('jm: trying to create a user: ', response);
+    // console.log('jm: trying to create a user: ', response);
     return response;
   }
 }
