@@ -55,3 +55,14 @@ Content-Type: application/json
     "email": "john@gmail.com",
     "password": "fatcat32"
 }
+
+
+### POST create user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username": "johnsmith",
+    "email": "somethsdfsding@email.com",
+    "password": "fatcat32"
+}
