@@ -12,16 +12,15 @@ export class TweetService {
   ];
 
   getTweets(userId: number) {
-    const user = this.userService.getUserById(userId);
-
-    if (user === 'No user found') {
-      return 'No user found';
-    } else {
-      const tweets = this.tweets.filter((t) => t.userId === userId);
-      const response = tweets.map((t) => {
-        return { text: t.text, date: t.date, name: user.firstName };
-      });
-      return response;
-    }
+    // const user = this.userService.getUserById(userId);
+    // if (user === 'No user found') {
+    //   return 'No user found';
+    // } else {
+    //   const tweets = this.tweets.filter((t) => t.userId === userId);
+    //   const response = tweets.map((t) => {
+    //     return { text: t.text, date: t.date, name: user.firstName };
+    //   });
+    //   return response;
+    // }
   }
 }

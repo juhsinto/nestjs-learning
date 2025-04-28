@@ -12,13 +12,13 @@ export class AuthService {
 
   login(email: string, password: string) {
     console.log('jm: attempting to login');
-    const user = this.userService.users.find(
-      (u) => u.email === email && u.password === password,
-    );
-    if (user) {
-      this.isAuthenticated = true;
-      return 'MY_TOKEN';
-    }
+    // const user = this.userService.users.find(
+    //   (u) => u.email === email && u.password === password,
+    // );
+    // if (user) {
+    //   this.isAuthenticated = true;
+    //   return 'MY_TOKEN';
+    // }
     return 'User does not exist or credentials incorrect';
   }
 }
