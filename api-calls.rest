@@ -62,8 +62,11 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "john123",
-    "email": "john123@email.com",
-    "password": "fatcat32",
-    "profile": {"firstName": "",}
+    "username": "burgerman1",
+    "email": "burger2@email.com",
+    "password": "fatcat32"
 }
+
+
+### GET all profiles
+GET http://localhost:3000/profile
