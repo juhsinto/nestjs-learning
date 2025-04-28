@@ -20,7 +20,8 @@ Content-Type: application/json
 
 {
     "id": 10,
-    "name": "sfsdfsd",
+    "firstName": "sfsdfsd",
+    "lastName": "asfads",
     "email": "somethsdfsding@email.com",
     "age": 28,
     "gender": "female",
@@ -51,6 +52,6 @@ Content-Type: application/json
 
 {
     
-    "email": "somethsdfsding@email.com",
+    "email": "john@gmail.com",
     "password": "fatcat32"
 }

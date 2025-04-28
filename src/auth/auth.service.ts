@@ -16,6 +16,7 @@ export class AuthService {
       (u) => u.email === email && u.password === password,
     );
     if (user) {
+      this.isAuthenticated = true;
       return 'MY_TOKEN';
     }
     return 'User does not exist or credentials incorrect';

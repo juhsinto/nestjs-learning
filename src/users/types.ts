@@ -1,9 +1,10 @@
 export interface User {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   // age: number;
   gender?: string;
-  isMarried: boolean;
+  isMarried?: boolean;
   password: string;
 }

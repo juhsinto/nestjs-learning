@@ -18,7 +18,8 @@ export class UsersService {
   users: User[] = [
     {
       id: 1,
-      name: 'John',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'john@gmail.com',
       // age: 28,
       gender: 'male',
@@ -27,7 +28,8 @@ export class UsersService {
     },
     {
       id: 2,
-      name: 'fgfd',
+      firstName: 'fgfd',
+      lastName: 'dfgdf',
       email: 'gffd@gmail.com',
       // age: 34,
       gender: 'fa',
@@ -68,8 +70,11 @@ export class UsersService {
         if (newUserDetails?.email) {
           user.email = newUserDetails.email;
         }
-        if (newUserDetails?.name) {
-          user.name = newUserDetails.name;
+        if (newUserDetails?.firstName) {
+          user.firstName = newUserDetails.firstName;
+        }
+        if (newUserDetails?.lastName) {
+          user.lastName = newUserDetails.lastName;
         }
         if (newUserDetails?.gender) {
           user.gender = newUserDetails.gender;

@@ -19,7 +19,7 @@ export class TweetService {
     } else {
       const tweets = this.tweets.filter((t) => t.userId === userId);
       const response = tweets.map((t) => {
-        return { text: t.text, date: t.date, name: user.name };
+        return { text: t.text, date: t.date, name: user.firstName };
       });
       return response;
     }
