@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { TweetModule } from './tweet/tweet.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
 import { ProfileModule } from './profile/profile.module';
 
 @Module({
@@ -15,7 +14,8 @@ import { ProfileModule } from './profile/profile.module';
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      entities: [User],
+      autoLoadEntities: true,
+      // entities: [User],
       synchronize: true,
       host: 'localhost',
       port: 5432,
