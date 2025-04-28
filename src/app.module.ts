@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { TweetModule } from './tweet/tweet.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { User } from './users/user.entity';
       password: 'root',
       database: 'nestjs',
     }),
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
