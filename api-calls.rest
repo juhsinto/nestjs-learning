@@ -40,11 +40,6 @@ Content-Type: application/json
 }
 
 
-### GET get Tweets
-GET http://localhost:3000/tweet/1
-Content-Type: application/json
-
-
 
 ### POST login user
 POST http://localhost:3000/auth
@@ -99,6 +94,10 @@ POST http://localhost:3000/tweet
 Content-Type: application/json
 
 {
-   "text": "my first tweet",
+   "text": "my second tweet",
    "userId": 10
 }
+
+### GET get Tweets
+GET http://localhost:3000/tweet/10
+Content-Type: application/json

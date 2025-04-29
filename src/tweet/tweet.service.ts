@@ -19,7 +19,11 @@ export class TweetService {
   //   { text: 'some new tweet', date: new Date('2024-11-12'), userId: 12 },
   // ];
 
-  getTweets(userId: number) {
+  public async getTweets(userId: number) {
+    return await this.tweetRepository.find({
+      where: { user: { id: userId } },
+    });
+
     // const user = this.userService.getUserById(userId);
     // if (user === 'No user found') {
     //   return 'No user found';
