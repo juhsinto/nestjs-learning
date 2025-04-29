@@ -22,6 +22,7 @@ export class TweetService {
   public async getTweets(userId: number) {
     return await this.tweetRepository.find({
       where: { user: { id: userId } },
+      relations: { user: true },
     });
 
     // const user = this.userService.getUserById(userId);
