@@ -135,15 +135,15 @@ export class UsersService {
 
   public async deleteUser(id: number) {
     //find user with given id
-    const user = await this.userRepository.findOneBy({ id });
+    // const user = await this.userRepository.findOneBy({ id });
 
     // delete user
     await this.userRepository.delete(id);
 
     // delete profile if exists
-    if (user?.profile?.id) {
-      await this.profileRepository.delete(user.profile.id);
-    }
+    // if (user?.profile?.id) {
+    //   await this.profileRepository.delete(user.profile.id);
+    // }
 
     // send response
     return { deleted: true };

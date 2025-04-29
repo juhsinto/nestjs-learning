@@ -76,3 +76,19 @@ GET http://localhost:3000/profile
 ### DELETE create user
 DELETE http://localhost:3000/users/6
 Content-Type: application/json
+
+
+### POST create user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username": "something",
+    "email": "somethsdfsding@email.com",   
+    "password": "fatcat32",
+    "profile": {
+        "firstName": "meow",
+        "lastName": "cat",
+        "gender": "male"
+    }
+}
