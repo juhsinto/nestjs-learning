@@ -132,4 +132,20 @@ export class UsersService {
     // console.log('jm: trying to create a user: ', response);
     return response;
   }
+
+  public async deleteUser(id: number) {
+    //find user with given id
+    const user = await this.userRepository.findOneBy({ id });
+
+    // delete user
+    await this.userRepository.delete(id);
+
+    // delete profile if exists
+    if (user?.profile?.id) {
+      await this.profileRepository.delete(user.profile.id);
+    }
+
+    // send response
+    return { deleted: true };
+  }
 }
