@@ -92,3 +92,13 @@ Content-Type: application/json
         "gender": "male"
     }
 }
+
+
+### POST create tweet
+POST http://localhost:3000/tweet
+Content-Type: application/json
+
+{
+   "text": "my first tweet",
+   "userId": 10
+}

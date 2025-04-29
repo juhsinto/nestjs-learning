@@ -148,4 +148,8 @@ export class UsersService {
     // send response
     return { deleted: true };
   }
+
+  public async findUserById(id: number) {
+    return await this.userRepository.findOneBy({ id });
+  }
 }
