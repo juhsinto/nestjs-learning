@@ -74,7 +74,7 @@ GET http://localhost:3000/profile
 
 
 ### DELETE create user
-DELETE http://localhost:3000/users/6
+DELETE http://localhost:3000/users/9
 Content-Type: application/json
 
 
