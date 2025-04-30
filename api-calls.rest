@@ -110,3 +110,14 @@ Content-Type: application/json
 {
    "name": "JS"
 }
+
+### POST create tweet
+POST http://localhost:3000/tweet
+Content-Type: application/json
+
+{
+   "text": "my third tweet",
+   "userId": 10,
+   "hashtags": [1]
+
+}

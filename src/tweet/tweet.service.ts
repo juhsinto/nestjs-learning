@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTweetDTO } from './dto/create-tweet.dto';
 import { HashtagService } from 'src/hashtag/hashtag.service';
+import { UpdateTweetDto } from './dto/update-tweet.dto';
 
 @Injectable()
 export class TweetService {
@@ -21,10 +22,14 @@ export class TweetService {
   //   { text: 'some new tweet', date: new Date('2024-11-12'), userId: 12 },
   // ];
 
+  public async getAllTweets() {
+    return await this.tweetRepository.find();
+  }
+
   public async getTweets(userId: number) {
     return await this.tweetRepository.find({
       where: { user: { id: userId } },
-      relations: { user: true },
+      relations: { user: true, hashtags: true },
     });
 
     // const user = this.userService.getUserById(userId);
@@ -57,5 +62,30 @@ export class TweetService {
       // save the tweet
       return await this.tweetRepository.save(tweet);
     }
+  }
+
+  // update hashtags of the tweet
+  public async updateTweet(updateTweetDto: UpdateTweetDto) {
+    // find all the hashtags
+    const hashtags = await this.hashtagService.findHashtags(
+      updateTweetDto.hashtags!,
+    );
+
+    // find tweet by id
+    const tweet = await this.tweetRepository.findOneBy({
+      id: updateTweetDto.id,
+    });
+
+    // update prop of the tweet
+    if (tweet) {
+      tweet.text = updateTweetDto.text ?? tweet.text;
+      tweet.image = updateTweetDto.image ?? tweet.image;
+      tweet.hashtags = hashtags;
+
+      return await this.tweetRepository.save(tweet);
+    }
+
+    // if can't find tweet by id
+    return null;
   }
 }
