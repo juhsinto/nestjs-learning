@@ -98,12 +98,18 @@ Content-Type: application/json
    "userId": 10
 }
 
-### GET get Tweets
+### GET  Tweets
 GET http://localhost:3000/tweet/10
 Content-Type: application/json
 
 
-### GET get Tweets
+
+### get hashtag
+GET http://localhost:3000/hashtag
+
+
+
+### create hashtag
 POST http://localhost:3000/hashtag
 Content-Type: application/json
 
@@ -116,9 +122,9 @@ POST http://localhost:3000/tweet
 Content-Type: application/json
 
 {
-   "text": "my fourth tweet",
+   "text": "my sixth tweet",
    "userId": 10,
-   "hashtags": [1,2]
+   "hashtags": [1,4]
 
 }
 
@@ -128,8 +134,8 @@ Content-Type: application/json
 
 {
    "text": "my third tweet - updated - add 2 #",
-   "id": 3,
-   "hashtags": [1,2]
+   "id": 5,
+   "hashtags": [1,4]
 }
 
 
@@ -140,4 +146,9 @@ Content-Type: application/json
 
 ### Delete hashtag
 Delete http://localhost:3000/hashtag/2
+Content-Type: application/json
+
+
+### Soft Delete hashtag
+Delete http://localhost:3000/hashtag/4
 Content-Type: application/json
