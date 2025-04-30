@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Hashtag } from './hashtag.entity';
 import { CreateHashtagDTO } from './dto/CreateHashtag.dto';
 
@@ -15,5 +15,11 @@ export class HashtagService {
     const hashtag = this.hashtagRepository.create(CreateHashtagDTO);
 
     return await this.hashtagRepository.save(hashtag);
+  }
+
+  public async findHashtags(hashtags: number[]) {
+    return await this.hashtagRepository.find({
+      where: { id: In(hashtags) },
+    });
   }
 }

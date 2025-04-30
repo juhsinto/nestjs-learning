@@ -4,11 +4,13 @@ import { Tweet } from './tweet.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTweetDTO } from './dto/create-tweet.dto';
+import { HashtagService } from 'src/hashtag/hashtag.service';
 
 @Injectable()
 export class TweetService {
   constructor(
     private readonly userService: UsersService,
+    private readonly hashtagService: HashtagService,
     @InjectRepository(Tweet)
     private readonly tweetRepository: Repository<Tweet>,
   ) {}
@@ -42,8 +44,15 @@ export class TweetService {
     const user = await this.userService.findUserById(createTweetDto.userId);
 
     if (user) {
+      const hashtags = await this.hashtagService.findHashtags(
+        createTweetDto.hashtags,
+      );
       // create a tweet
-      const tweet = this.tweetRepository.create({ ...createTweetDto, user });
+      const tweet = this.tweetRepository.create({
+        ...createTweetDto,
+        user,
+        hashtags,
+      });
 
       // save the tweet
       return await this.tweetRepository.save(tweet);

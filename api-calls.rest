@@ -108,5 +108,5 @@ POST http://localhost:3000/hashtag
 Content-Type: application/json
 
 {
-   "name": "nestJS"
+   "name": "JS"
 }
