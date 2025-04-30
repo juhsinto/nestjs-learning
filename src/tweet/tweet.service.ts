@@ -88,4 +88,12 @@ export class TweetService {
     // if can't find tweet by id
     return null;
   }
+
+  public async deleteTweet(id: number) {
+    await this.tweetRepository.delete({
+      id,
+    });
+
+    return { deleted: true, id };
+  }
 }
