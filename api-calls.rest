@@ -101,3 +101,12 @@ Content-Type: application/json
 ### GET get Tweets
 GET http://localhost:3000/tweet/10
 Content-Type: application/json
+
+
+### GET get Tweets
+POST http://localhost:3000/hashtag
+Content-Type: application/json
+
+{
+   "name": "nestJS"
+}
