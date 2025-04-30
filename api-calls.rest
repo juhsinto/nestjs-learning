@@ -116,8 +116,28 @@ POST http://localhost:3000/tweet
 Content-Type: application/json
 
 {
-   "text": "my third tweet",
+   "text": "my fourth tweet",
    "userId": 10,
-   "hashtags": [1]
+   "hashtags": [1,2]
 
 }
+
+### Update tweet
+PATCH http://localhost:3000/tweet
+Content-Type: application/json
+
+{
+   "text": "my third tweet - updated - add 2 #",
+   "id": 3,
+   "hashtags": [1,2]
+}
+
+
+### Delete tweet
+Delete http://localhost:3000/tweet/3
+Content-Type: application/json
+
+
+### Delete hashtag
+Delete http://localhost:3000/hashtag/2
+Content-Type: application/json

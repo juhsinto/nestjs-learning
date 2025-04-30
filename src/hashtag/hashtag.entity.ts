@@ -13,6 +13,6 @@ export class Hashtag {
   })
   name: string;
 
-  @ManyToMany(() => Tweet, (tweet) => tweet.hashtags)
+  @ManyToMany(() => Tweet, (tweet) => tweet.hashtags, { onDelete: 'CASCADE' })
   tweets: Tweet[];
 }
