@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
+import { ConfigService } from '@nestjs/config';
 // import { ConfigService } from '@nestjs/config';
 // import { Profile } from 'src/profile/profile.entity';
 
@@ -15,7 +16,7 @@ export class UsersService {
 
     // @InjectRepository(Profile)
     // private profileRepository: Repository<Profile>,
-    // private readonly configService: ConfigService,
+    private readonly configService: ConfigService,
   ) {}
 
   // users: User[] = [
@@ -93,8 +94,10 @@ export class UsersService {
   // }
 
   getAllUsers() {
-    // const env = this.configService.get<string>('ENV_MODE');
-    // console.log('jm: env mode is ', env);
+    const environment = process.env.NODE_ENV;
+    console.log('jm: node env ', environment);
+    const env = this.configService.get<string>('ENV_MODE');
+    console.log('jm: env mode is ', env);
     return this.userRepository.find({
       relations: {
         profile: true,
