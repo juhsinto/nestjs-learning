@@ -152,3 +152,8 @@ Content-Type: application/json
 ### Soft Delete hashtag
 Delete http://localhost:3000/hashtag/4
 Content-Type: application/json
+
+
+### GET  Tweets with invalid userID - exception test
+GET http://localhost:3000/tweet/110
+
