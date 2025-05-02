@@ -134,6 +134,16 @@ export class UsersService {
       // const profile = this.profileRepository.create(userDto.profile);
       // await this.profileRepository.save(profile);
 
+      // check if the user with same username / email already exists
+      const existingUser = await this.userRepository.findOne({
+        where: [{ username: userDto.username }, { email: userDto.email }],
+      });
+      if (existingUser) {
+        throw new BadRequestException(
+          'there is some duplicate value for the user/email in the db',
+        );
+      }
+
       // create a user obj
       const user = this.userRepository.create(userDto);
       // console.log('jm: creating a user ', user);
@@ -152,12 +162,14 @@ export class UsersService {
             { description: 'There was a problem fetching from the db ' },
           );
         }
-        if (error.code === '23505') {
-          throw new BadRequestException(
-            'there is some duplicate value for the user in the db',
-            { description: error.detail as string },
-          );
-        }
+        // if (error.code === '23505') {
+        //   throw new BadRequestException(
+        //     'there is some duplicate value for the user in the db',
+        //     { description: error.detail as string },
+        //   );
+        // }
+      } else {
+        throw error;
       }
     }
   }
