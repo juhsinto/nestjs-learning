@@ -1,4 +1,8 @@
-import { Injectable, RequestTimeoutException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
 // import { User } from './types';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -100,7 +104,7 @@ export class UsersService {
           profile: true,
         },
       });
-    } catch (error) {
+    } catch {
       throw new RequestTimeoutException(
         'An error has occured. try again later',
         { description: 'There was a problem fetching from the db ' },
@@ -124,23 +128,38 @@ export class UsersService {
     // newUser = await this.userRepository.save(newUser);
     // return newUser;
 
-    // TODO: try catch
+    try {
+      // create a profile
+      userDto.profile = userDto.profile ?? {};
+      // const profile = this.profileRepository.create(userDto.profile);
+      // await this.profileRepository.save(profile);
 
-    // create a profile
-    userDto.profile = userDto.profile ?? {};
-    // const profile = this.profileRepository.create(userDto.profile);
-    // await this.profileRepository.save(profile);
+      // create a user obj
+      const user = this.userRepository.create(userDto);
+      // console.log('jm: creating a user ', user);
+      // set the profile
+      // user.profile = profile;
 
-    // create a user obj
-    const user = this.userRepository.create(userDto);
-    // console.log('jm: creating a user ', user);
-    // set the profile
-    // user.profile = profile;
-
-    // save the user
-    const response = await this.userRepository.save(user);
-    // console.log('jm: trying to create a user: ', response);
-    return response;
+      // save the user
+      const response = await this.userRepository.save(user);
+      // console.log('jm: trying to create a user: ', response);
+      return response;
+    } catch (error) {
+      if (error instanceof Error && 'code' in error && 'detail' in error) {
+        if (error?.code && error?.code === 'ECONNREFUSED') {
+          throw new RequestTimeoutException(
+            'An error has occured. try again later',
+            { description: 'There was a problem fetching from the db ' },
+          );
+        }
+        if (error.code === '23505') {
+          throw new BadRequestException(
+            'there is some duplicate value for the user in the db',
+            { description: error.detail as string },
+          );
+        }
+      }
+    }
   }
 
   public async deleteUser(id: number) {
