@@ -30,13 +30,13 @@ export class UsersController {
   //   return this.usersService.getAllUsers();
   // }
 
-  // @Get(':id')
-  // // getUser(@Param('id', new DefaultValuePipe(1), ParseIntPipe) id: number) {
-  // getUser(@Param('id', ParseIntPipe) id: number) {
-  //   console.log('jm: get users by id ', id);
+  @Get(':id')
+  // getUser(@Param('id', new DefaultValuePipe(1), ParseIntPipe) id: number) {
+  getUser(@Param('id', ParseIntPipe) id: number) {
+    console.log('jm: get users by id ', id);
 
-  //   return this.usersService.getUserById(id);
-  // }
+    return this.usersService.findUserById(id);
+  }
 
   // @Get('married/:isMarried')
   // getUsersFiltered(@Param('isMarried', ParseBoolPipe) married: boolean) {

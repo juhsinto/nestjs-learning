@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   RequestTimeoutException,
 } from '@nestjs/common';
@@ -191,6 +193,20 @@ export class UsersService {
   }
 
   public async findUserById(id: number) {
-    return await this.userRepository.findOneBy({ id });
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: `User with id ${id} was not found`,
+          table: 'user',
+        },
+        HttpStatus.NOT_FOUND,
+        {
+          description: `the exception occurred because a user with id ${id} was not found`,
+        },
+      );
+    }
+    return user;
   }
 }
