@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, RequestTimeoutException } from '@nestjs/common';
 // import { User } from './types';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -93,16 +93,19 @@ export class UsersService {
   //   return user;
   // }
 
-  getAllUsers() {
-    const environment = process.env.NODE_ENV;
-    console.log('jm: node env ', environment);
-    const env = this.configService.get<string>('ENV_MODE');
-    console.log('jm: env mode is ', env);
-    return this.userRepository.find({
-      relations: {
-        profile: true,
-      },
-    });
+  public async getAllUsers() {
+    try {
+      return await this.userRepository.find({
+        relations: {
+          profile: true,
+        },
+      });
+    } catch (error) {
+      throw new RequestTimeoutException(
+        'An error has occured. try again later',
+        { description: 'There was a problem fetching from the db ' },
+      );
+    }
   }
 
   public async createUser(userDto: CreateUserDto) {
