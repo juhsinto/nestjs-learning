@@ -162,4 +162,4 @@ Content-Type: application/json
 GET http://localhost:3000/tweet/110
 
 ### Get users with pagination
-GET http://localhost:3000/users?page=1&limit=1
+GET http://localhost:3000/users?page=2&limit=1

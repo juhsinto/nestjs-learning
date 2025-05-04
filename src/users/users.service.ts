@@ -14,6 +14,7 @@ import { ConfigService } from '@nestjs/config';
 import { UserAlreadyExistsException } from 'src/CustomExceptions/user-already-exists.exception';
 import { PaginationProvider } from 'src/common/pagination/pagination-provider';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
+import { Paginated } from 'src/common/pagination/paginated.interface';
 // import { ConfigService } from '@nestjs/config';
 // import { Profile } from 'src/profile/profile.entity';
 
@@ -104,7 +105,9 @@ export class UsersService {
   //   return user;
   // }
 
-  public async getAllUsers(pageQueryDto: PaginationQueryDto) {
+  public async getAllUsers(
+    pageQueryDto: PaginationQueryDto,
+  ): Promise<Paginated<User>> {
     try {
       // return await this.userRepository.find({
       //   relations: {
@@ -114,6 +117,8 @@ export class UsersService {
       return await this.paginationProvider.paginateQuery(
         pageQueryDto,
         this.userRepository,
+        undefined,
+        ['profile'],
       );
     } catch {
       throw new RequestTimeoutException(
