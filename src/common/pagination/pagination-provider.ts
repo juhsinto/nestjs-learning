@@ -24,6 +24,32 @@ export class PaginationProvider {
     if (where) {
       findOptions.where = where;
     }
-    return await repository.find(findOptions);
+
+    const result = await repository.find(findOptions);
+    const totalItems = await repository.count();
+    const totalPages = paginationQueryDto.limit
+      ? Math.ceil(totalItems / paginationQueryDto.limit)
+      : 0;
+
+    const currentPage = paginationQueryDto.page;
+    const nextPage =
+      currentPage === totalPages ? currentPage : currentPage && currentPage + 1;
+    const previousPage =
+      currentPage === 1 ? currentPage : currentPage && currentPage - 1;
+    // const firstPage = 'firstPage';
+    // const lastPage = 'lastPage';
+
+    const response = {
+      data: result,
+      meta: {
+        itemsPerPage: paginationQueryDto.limit,
+        totalItems: totalItems,
+        currentPage: paginationQueryDto.page,
+        totalPages: totalPages,
+      },
+      links: { nextPage, previousPage },
+    };
+
+    return response;
   }
 }
