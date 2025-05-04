@@ -78,7 +78,7 @@ Content-Type: application/json
 POST http://localhost:3000/users
 Content-Type: application/json
 
-{
+{ 
     "username": "somethingnew12",
     "email": "somethsdfsding@email.com",   
     "password": "fatcat32",
@@ -103,7 +103,9 @@ Content-Type: application/json
 GET http://localhost:3000/tweet/10
 Content-Type: application/json
 
-
+### GET  Tweets with pagination
+GET http://localhost:3000/tweet/10?limit=2&page=2
+Content-Type: application/json
 
 ### get hashtag
 GET http://localhost:3000/hashtag
