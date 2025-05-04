@@ -22,6 +22,9 @@ export class Hashtag {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToMany(() => Tweet, (tweet) => tweet.hashtags, { onDelete: 'CASCADE' })
+  @ManyToMany(() => Tweet, (tweet) => tweet.hashtags, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
   tweets: Tweet[];
 }

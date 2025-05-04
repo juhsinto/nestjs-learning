@@ -36,7 +36,7 @@ export class TweetService {
 
     return await this.tweetRepository.find({
       where: { user: { id: userId } },
-      relations: { user: true, hashtags: true },
+
       skip:
         pageQueryDto.page && pageQueryDto.limit
           ? (pageQueryDto?.page - 1) * pageQueryDto?.limit
