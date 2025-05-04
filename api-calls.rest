@@ -79,8 +79,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 { 
-    "username": "somethingnew12",
-    "email": "somethsdfsding@email.com",   
+    "username": "somethingnew122",
+    "email": "somethsdfsding123@email.com",   
     "password": "fatcat32",
     "profile": {
         "firstName": "meow",
@@ -104,7 +104,7 @@ GET http://localhost:3000/tweet/10
 Content-Type: application/json
 
 ### GET  Tweets with pagination
-GET http://localhost:3000/tweet/10?limit=2&page=2
+GET http://localhost:3000/tweet/10?limit=1&page=2
 #&startDate=2023-01-01&endDate=2023-12-31
 Content-Type: application/json
 
@@ -161,3 +161,5 @@ Content-Type: application/json
 ### GET  Tweets with invalid userID - exception test
 GET http://localhost:3000/tweet/110
 
+### Get users with pagination
+GET http://localhost:3000/users?page=1&limit=1
