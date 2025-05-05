@@ -1,9 +1,15 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { UsersService } from 'src/users/users.service';
 import authConfig from './config/auth.config';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { HashingProvider } from './provider/hashing.provider';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +19,8 @@ export class AuthService {
 
     @Inject(authConfig.KEY)
     private readonly authConfiguration: ConfigType<typeof authConfig>,
+
+    private readonly hashingProvider: HashingProvider,
   ) {}
 
   isAuthenticated: boolean = false;
@@ -21,7 +29,21 @@ export class AuthService {
     // find user with username
     const user = await this.userService.findUserByUsername(loginDto.username);
     // if user availble compare the password
-    // if pasword match login success ; return token
+    let isEqual: boolean = false;
+    isEqual = await this.hashingProvider.comparePassword(
+      loginDto.password,
+      user.password,
+    );
+    if (!isEqual) {
+      throw new UnauthorizedException('Invalid credentials');
+    } else {
+      // if pasword match login success ; return token
+      return {
+        data: user,
+        success: true,
+        message: 'user logged in successfully',
+      };
+    }
 
     // send response;
     return user;
