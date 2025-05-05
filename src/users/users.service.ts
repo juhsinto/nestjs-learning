@@ -1,7 +1,9 @@
 import {
+  forwardRef,
   // BadRequestException,
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   RequestTimeoutException,
 } from '@nestjs/common';
@@ -15,6 +17,7 @@ import { UserAlreadyExistsException } from 'src/CustomExceptions/user-already-ex
 import { PaginationProvider } from 'src/common/pagination/pagination-provider';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/paginated.interface';
+import { HashingProvider } from 'src/auth/provider/hashing.provider';
 // import { ConfigService } from '@nestjs/config';
 // import { Profile } from 'src/profile/profile.entity';
 
@@ -29,6 +32,9 @@ export class UsersService {
     private readonly configService: ConfigService,
 
     private readonly paginationProvider: PaginationProvider,
+
+    @Inject(forwardRef(() => HashingProvider))
+    private readonly hashingProvider: HashingProvider,
   ) {}
 
   // users: User[] = [
@@ -166,14 +172,17 @@ export class UsersService {
       }
 
       // create a user obj
-      const user = this.userRepository.create(userDto);
+      const user = this.userRepository.create({
+        ...userDto,
+        password: await this.hashingProvider.hashPassword(userDto.password),
+      });
       // console.log('jm: creating a user ', user);
       // set the profile
       // user.profile = profile;
 
       // save the user
       const response = await this.userRepository.save(user);
-      console.log('jm: trying to create a user: ', response);
+      console.log('jm: trying to create a user');
       return response;
     } catch (error) {
       if (error instanceof Error && 'code' in error && 'detail' in error) {
