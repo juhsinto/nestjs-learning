@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from 'src/users/users.module';
@@ -9,8 +9,8 @@ import authConfig from './config/auth.config';
   controllers: [AuthController],
   providers: [AuthService],
   imports: [
+    UsersModule,
     ConfigModule.forFeature(authConfig), // Load auth config
-    forwardRef(() => UsersModule),
   ],
   exports: [AuthService],
 })

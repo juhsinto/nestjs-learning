@@ -173,7 +173,7 @@ export class UsersService {
 
       // save the user
       const response = await this.userRepository.save(user);
-      // console.log('jm: trying to create a user: ', response);
+      console.log('jm: trying to create a user: ', response);
       return response;
     } catch (error) {
       if (error instanceof Error && 'code' in error && 'detail' in error) {
@@ -190,6 +190,7 @@ export class UsersService {
         //   );
         // }
       } else {
+        console.log("'jm: error', error);");
         throw error;
       }
     }
