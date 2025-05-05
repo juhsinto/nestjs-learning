@@ -3,6 +3,7 @@ import { ConfigType } from '@nestjs/config';
 import { UsersService } from 'src/users/users.service';
 import authConfig from './config/auth.config';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,19 +17,14 @@ export class AuthService {
 
   isAuthenticated: boolean = false;
 
-  login(email: string, password: string) {
-    console.log('jm: auth config', this.authConfiguration);
-    console.log('jm: attempting to login');
-    console.log('jm: email', email);
-    console.log('jm: password', password);
-    // const user = this.userService.users.find(
-    //   (u) => u.email === email && u.password === password,
-    // );
-    // if (user) {
-    //   this.isAuthenticated = true;
-    //   return 'MY_TOKEN';
-    // }
-    return 'User does not exist or credentials incorrect';
+  public async login(loginDto: LoginDto) {
+    // find user with username
+    const user = await this.userService.findUserByUsername(loginDto.username);
+    // if user availble compare the password
+    // if pasword match login success ; return token
+
+    // send response;
+    return user;
   }
 
   public async signup(createUserDto: CreateUserDto) {

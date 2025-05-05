@@ -6,6 +6,7 @@ import {
   Inject,
   Injectable,
   RequestTimeoutException,
+  UnauthorizedException,
 } from '@nestjs/common';
 // import { User } from './types';
 import { Repository } from 'typeorm';
@@ -132,6 +133,27 @@ export class UsersService {
         { description: 'There was a problem fetching from the db ' },
       );
     }
+  }
+  public async findUserByUsername(username: string): Promise<User> {
+    let user: User | null = null;
+    try {
+      user = await this.userRepository.findOneBy({
+        username,
+      });
+    } catch (error) {
+      console.log(
+        'jm: encountered error while trying to check if username exists',
+      );
+      throw new RequestTimeoutException(error, {
+        description: 'user with username could not be found!',
+      });
+    }
+
+    if (!user) {
+      throw new UnauthorizedException('user does not exist ');
+    }
+
+    return user;
   }
 
   public async createUser(userDto: CreateUserDto) {
