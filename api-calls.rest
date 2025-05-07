@@ -163,3 +163,24 @@ GET http://localhost:3000/tweet/110
 
 ### Get users with pagination
 GET http://localhost:3000/users?page=2&limit=1
+
+
+### POST signup user
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "username": "burgerman1234",
+    "email": "john1243@gmail.com",
+    "password": "fatcat32"
+}
+
+
+### POST login user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "burgerman1234",
+    "password": "fatcat32"
+}

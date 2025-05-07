@@ -9,5 +9,9 @@ export default Joi.object({
   DB_USERNAME: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
   DB_HOST: Joi.string().required(),
-  SECRET_KEY: Joi.string().required(),
+  // SECRET_KEY: Joi.string().required(),
+  JWT_TOKEN_SECRET: Joi.string().required(),
+  JWT_TOKEN_EXPIRES_IN: Joi.number(),
+  JWT_TOKEN_AUDIENCE: Joi.string(),
+  JWT_TOKEN_ISSUER: Joi.string(),
 });
